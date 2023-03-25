@@ -1,11 +1,9 @@
 body {
     background-color: green;
     font-family: 'Courgette', cursive;
-}
-div {
     font-size: 5vw;
 }
 
-.text-center {
+i {
     font-size: 10vw;
 }
