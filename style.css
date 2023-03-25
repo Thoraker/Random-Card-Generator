@@ -7,3 +7,7 @@ body {
 i {
     font-size: 10vw;
 }
+
+#foot {
+    rotate: 180deg;
+}
