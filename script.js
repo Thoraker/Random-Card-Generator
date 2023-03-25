@@ -15,33 +15,21 @@ let diamonds = document.createElement("i");
 diamonds.classList = "bi bi-suit-diamond-fill";
 diamonds.style = "color: red";
 
-let suits = [hearts, spades, clubs, diamonds]
+let suits = [hearts, spades, clubs, diamonds];
 
 let cardContent = document.querySelector(".card-body");
-
-// Proyecto en construcción: Para que la carta no se repita hasta que se reinicie
-// let downCards = [];
-// let card = "";
 
 window.onload = cardGenerator = () => {
 	let rank = Math.floor(Math.random() * ranks.length);
 	let suit = Math.floor(Math.random() * suits.length);
 	let cardHeader = document.createElement("div");
-    let cardFooter = document.createElement("div");
-    let cardDraw = document.createElement("div");
-    cardDraw.append(suits[suit]);
-    cardHeader.classList = "text-start";
-    cardDraw.classList = "text-center";
-    cardFooter.classList = "text-end";
+	let cardFooter = document.createElement("div");
+	let cardDraw = document.createElement("div");
+	cardDraw.append(suits[suit]);
+	cardHeader.classList = "text-start";
+	cardDraw.classList = "text-center";
+	cardFooter.classList = "text-end";
 	cardHeader.textContent = ranks[rank];
-    cardFooter.textContent = ranks[rank];
-	console.log(cardHeader);
-    console.log(suits[suit]);
-    console.log(cardDraw);
-    console.log(cardFooter);
-	
+	cardFooter.textContent = ranks[rank];
 	cardContent.append(cardHeader, cardDraw, cardFooter);
-
-	// card = ranks[rank] + "_" + suits[suit];
-	// downCards.push(card);
 };
