@@ -1,0 +1,12 @@
+body {
+    background-color: green;
+    font-family: 'Courgette', cursive;
+    font-size: 100%;
+}
+div {
+    font-size: 3rem;
+}
+
+.text-center {
+    font-size: 20rem;
+}

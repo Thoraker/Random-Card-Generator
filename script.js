@@ -1,26 +1,47 @@
-let pronoun = ['the', 'our'];
-let adj = ['great', 'big'];
-let noun = ['jogger', 'racoon'];
-let extension = ['.com', '.org', '.io', '.net'];
+let ranks = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
 
-let nestedArray = [];
-nestedArray.push(pronoun, adj, noun, extension);
+let hearts = document.createElement("i");
+hearts.classList = "bi bi-suit-heart-fill";
+hearts.style = "color: red";
 
-window.onload = () => {
-    let name = [];
-    for (let i in nestedArray[0]) {
-        for (let j in nestedArray[1]) {
-            for (let k in nestedArray[2]) {
-                for (let l in nestedArray[3]) {
-                    name.push('www.'.concat(nestedArray[0][i], nestedArray[1][j] ,nestedArray[2][k], nestedArray[3][l]));
-                };
-            };
-        };
-    };
-    let list = document.getElementById("myList");  
-    name.forEach((item)=>{
-        let li = document.createElement("li");
-        li.innerText = item;
-        list.appendChild(li);
-    })
+let spades = document.createElement("i");
+spades.classList = "bi bi-suit-spade-fill";
+
+let clubs = document.createElement("i");
+clubs.classList = "bi bi-suit-club-fill";
+console.log(hearts);
+
+let diamonds = document.createElement("i");
+diamonds.classList = "bi bi-suit-diamond-fill";
+diamonds.style = "color: red";
+
+let suits = [hearts, spades, clubs, diamonds]
+
+let cardContent = document.querySelector(".card-body");
+
+// Proyecto en construcción: Para que la carta no se repita hasta que se reinicie
+// let downCards = [];
+// let card = "";
+
+window.onload = cardGenerator = () => {
+	let rank = Math.floor(Math.random() * ranks.length);
+	let suit = Math.floor(Math.random() * suits.length);
+	let cardHeader = document.createElement("div");
+    let cardFooter = document.createElement("div");
+    let cardDraw = document.createElement("div");
+    cardDraw.append(suits[suit]);
+    cardHeader.classList = "text-start";
+    cardDraw.classList = "text-center";
+    cardFooter.classList = "text-end";
+	cardHeader.textContent = ranks[rank];
+    cardFooter.textContent = ranks[rank];
+	console.log(cardHeader);
+    console.log(suits[suit]);
+    console.log(cardDraw);
+    console.log(cardFooter);
+	
+	cardContent.append(cardHeader, cardDraw, cardFooter);
+
+	// card = ranks[rank] + "_" + suits[suit];
+	// downCards.push(card);
 };
