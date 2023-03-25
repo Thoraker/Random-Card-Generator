@@ -27,6 +27,18 @@ const cardGenerator = () => {
 	cardHeader.textContent = ranks[rank];
 	cardFooter.textContent = ranks[rank];
 	cardContent.append(cardHeader, suits[suit], cardFooter);
+    
 };
 
-window.onload = cardGenerator;
+window.onload = cardGenerator();
+
+const newCard = () => {
+    while (cardContent.firstChild) {
+        cardContent.removeChild(cardContent.lastChild);
+    };
+    cardGenerator();
+};
+
+document.getElementById("newCard").addEventListener("click", newCard);
+
+window.setInterval(newCard, 10000);
