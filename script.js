@@ -13,32 +13,66 @@ diamonds.classList = "bi bi-suit-diamond-fill text-danger";
 
 let suits = [hearts, spades, clubs, diamonds]; // Arreglo con los elementos correspondientes a cada palo
 
-let cardContent = document.querySelector(".card-body"); // Selector para cargar la carta generada
+// Selectores para mostar cartas en HTML
+let cardContent = document.querySelector(".card-body"); 
+let deck = document.querySelector("#deck")
+let down = document.querySelector("#down")
 
-// Función para generar carta
-const cardGenerator = () => {
-    let rank = Math.floor(Math.random() * ranks.length);
+let downCard = []; // Arreglo con cartas boca abajo
+
+// Función para generar carta aleatoria
+let cardGenerator = () => {
+	let rank = Math.floor(Math.random() * ranks.length);
 	let suit = Math.floor(Math.random() * suits.length);
-	let cardHeader = document.createElement("div");
-	let cardFooter = document.createElement("div");
-	cardHeader.classList = "text-start";
-	cardFooter.classList = "text-start";
-    cardFooter.id = "foot";
-	cardHeader.textContent = ranks[rank];
-	cardFooter.textContent = ranks[rank];
-	cardContent.append(cardHeader, suits[suit], cardFooter);
-    
+	let card = [rank, suit];
+    console.log(card);
+    return card;
 };
 
-window.onload = cardGenerator();
-
-const newCard = () => {
-    while (cardContent.firstChild) {
-        cardContent.removeChild(cardContent.lastChild);
-    };
-    cardGenerator();
+let visibleCard = ([a, b]) => {
+    let cardName = a + "_" + b;
+    console.log(cardName);
+	if (downCard.length > 51)
+		alert("No quedan cartas en la baraja, favor revuelve los naipes");
+	else if (!downCard.includes(cardName)) {
+		downCard.push(cardName);
+        console.log(downCard);
+		while (cardContent.firstChild) {
+			cardContent.removeChild(cardContent.lastChild);
+		}
+		let cardHeader = document.createElement("div");
+		let cardFooter = document.createElement("div");
+		cardHeader.classList = "text-start";
+		cardFooter.classList = "text-start";
+		cardFooter.id = "foot";
+		cardHeader.textContent = ranks[a];
+		cardFooter.textContent = ranks[a];
+		cardContent.append(cardHeader, suits[b], cardFooter);
+        if (downCard.length == 1) {
+            down.style.visibility = "hidden";
+        }
+        else down.style.visibility = "";
+        if (downCard.length == 52) {
+            deck.style.visibility = "hidden";
+        }
+        else deck.style.visibility = "";
+	}
+    else visibleCard(cardGenerator());
 };
 
-document.getElementById("newCard").addEventListener("click", newCard);
+window.onload = visibleCard(cardGenerator());
 
-window.setInterval(newCard, 10000);
+document.getElementById("newCard").addEventListener(
+	"click",
+	(draw = () => {
+		visibleCard(cardGenerator());
+	})
+);
+
+document.getElementById("newDeck").addEventListener(
+	"click",
+	(shuffle = () => {
+        downCard = [];
+		visibleCard(cardGenerator());
+	})
+);
