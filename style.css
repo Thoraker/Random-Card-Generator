@@ -13,15 +13,9 @@ i {
 }
 
 #deck {
-    background-image: url("img/decksback.jpg");
     background-color: black;
-    background-size: cover; 
-    background-position: center;
 }
 
 #down {
-    background-image: url("img/decksback.jpg");
     background-color: black;
-    background-size: cover; 
-    background-position: center;
 }

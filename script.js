@@ -3,20 +3,29 @@ let ranks = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
 
 // Elementos para el palo de cada carta
 let hearts = document.createElement("i");
-hearts.classList = "bi bi-suit-heart-fill text-danger";
+hearts.classList =
+	"bi bi-suit-heart-fill position-absolute top-50 start-50 translate-middle";
 let spades = document.createElement("i");
-spades.classList = "bi bi-suit-spade-fill";
+spades.classList =
+	"bi bi-suit-spade-fill position-absolute top-50 start-50 translate-middle";
 let clubs = document.createElement("i");
-clubs.classList = "bi bi-suit-club-fill";
+clubs.classList =
+	"bi bi-suit-club-fill position-absolute top-50 start-50 translate-middle";
 let diamonds = document.createElement("i");
-diamonds.classList = "bi bi-suit-diamond-fill text-danger";
+diamonds.classList =
+	"bi bi-suit-diamond-fill text-danger position-absolute top-50 start-50 translate-middle";
 
 let suits = [hearts, spades, clubs, diamonds]; // Arreglo con los elementos correspondientes a cada palo
 
-// Selectores para mostar cartas en HTML
-let cardContent = document.querySelector(".card-body"); 
-let deck = document.querySelector("#deck")
-let down = document.querySelector("#down")
+// Selectores para mostrar cartas en HTML
+let cardContent = document.querySelector("#card");
+let deck = document.querySelector("#deck");
+let down = document.querySelector("#down");
+let cardHeader = document.createElement("div");
+let cardFooter = document.createElement("div");
+cardHeader.classList = "p-4 position-absolute top-0 start-0";
+cardFooter.classList = "p-4 position-absolute bottom-0 end-0";
+cardFooter.id = "foot";
 
 let downCard = []; // Arreglo con cartas boca abajo
 
@@ -40,11 +49,6 @@ let visibleCard = ([a, b]) => {
 		while (cardContent.firstChild) {
 			cardContent.removeChild(cardContent.lastChild);
 		}
-		let cardHeader = document.createElement("div");
-		let cardFooter = document.createElement("div");
-		cardHeader.classList = "text-start";
-		cardFooter.classList = "text-start";
-		cardFooter.id = "foot";
 		cardHeader.textContent = ranks[a];
 		cardFooter.textContent = ranks[a];
 		cardContent.append(cardHeader, suits[b], cardFooter);
