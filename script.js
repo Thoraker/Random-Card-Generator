@@ -27,56 +27,48 @@ cardHeader.classList = "p-4 position-absolute top-0 start-0";
 cardFooter.classList = "p-4 position-absolute bottom-0 end-0";
 cardFooter.id = "foot";
 
-let downCard = []; // Arreglo con cartas boca abajo
+// Arreglo con cartas que ya aparecieron
+let downCard = [];
 
-// Función para generar carta aleatoria
-let cardGenerator = () => {
+// Función para generar carta aleatoria que registra en downCard las cartas que ya aparecieron
+function cardGenerator() {
 	let rank = Math.floor(Math.random() * ranks.length);
 	let suit = Math.floor(Math.random() * suits.length);
 	let card = [rank, suit];
-    console.log(card);
-    return card;
+	let cardName = rank + "_" + suit;
+	if (!downCard.includes(cardName)) {
+		downCard.push(cardName);
+        if (downCard.length == 1) down.style.visibility = "hidden";
+        else down.style.visibility = "";
+        if (downCard.length == 52) deck.style.visibility = "hidden";
+        else deck.style.visibility = "";
+		return card;
+	} else cardGenerator();
 };
 
-let visibleCard = ([a, b]) => {
-    let cardName = a + "_" + b;
-    console.log(cardName);
+// Función para mostrar barajas y carta boca arriba
+function visibleCard([a, b]) {
+    while (cardContent.firstChild)  // Borra carta anterior
+    cardContent.removeChild(cardContent.lastChild);
+	cardHeader.textContent = ranks[a];
+	cardFooter.textContent = ranks[a];
+	cardContent.append(cardHeader, suits[b], cardFooter);
+};
+
+function newCard() {
 	if (downCard.length > 51)
 		alert("No quedan cartas en la baraja, favor revuelve los naipes");
-	else if (!downCard.includes(cardName)) {
-		downCard.push(cardName);
-        console.log(downCard);
-		while (cardContent.firstChild) {
-			cardContent.removeChild(cardContent.lastChild);
-		}
-		cardHeader.textContent = ranks[a];
-		cardFooter.textContent = ranks[a];
-		cardContent.append(cardHeader, suits[b], cardFooter);
-        if (downCard.length == 1) {
-            down.style.visibility = "hidden";
-        }
-        else down.style.visibility = "";
-        if (downCard.length == 52) {
-            deck.style.visibility = "hidden";
-        }
-        else deck.style.visibility = "";
-	}
-    else visibleCard(cardGenerator());
+	else visibleCard(cardGenerator());
 };
 
-window.onload = visibleCard(cardGenerator());
+function shuffle() {
+	downCard = [];
+	visibleCard(cardGenerator());
+};
 
-document.getElementById("newCard").addEventListener(
-	"click",
-	(draw = () => {
-		visibleCard(cardGenerator());
-	})
-);
+window.onload = newCard;
 
-document.getElementById("newDeck").addEventListener(
-	"click",
-	(shuffle = () => {
-        downCard = [];
-		visibleCard(cardGenerator());
-	})
-);
+document.getElementById("newCard").addEventListener("click", newCard);
+
+
+document.getElementById("newDeck").addEventListener("click", shuffle); 
