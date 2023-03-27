@@ -12,16 +12,10 @@ i {
     rotate: 180deg;
 }
 
-#deck {
-    background-image: url("img/decksback.jpg");
+#down {
     background-color: black;
-    background-size: cover; 
-    background-position: center;
 }
 
-#down {
-    background-image: url("img/decksback.jpg");
+#deck {
     background-color: black;
-    background-size: cover; 
-    background-position: center;
 }
