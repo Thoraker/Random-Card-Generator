@@ -31,42 +31,44 @@ cardFooter.id = "foot";
 let downCard = [];
 
 // Función para generar carta aleatoria que registra en downCard las cartas que ya aparecieron
-let cardGenerator = () => {
+function cardGenerator() {
 	let rank = Math.floor(Math.random() * ranks.length);
 	let suit = Math.floor(Math.random() * suits.length);
 	let card = [rank, suit];
 	let cardName = rank + "_" + suit;
 	if (!downCard.includes(cardName)) {
 		downCard.push(cardName);
-		console.log(card);
-		console.log(cardName);
-		console.log(downCard);
-		if (downCard.length == 1) down.style.visibility = "hidden";
-		else down.style.visibility = "";
-		if (downCard.length == 52) deck.style.visibility = "hidden";
-		else deck.style.visibility = "";
+        if (downCard.length == 1) down.style.visibility = "hidden";
+        else down.style.visibility = "";
+        if (downCard.length == 52) deck.style.visibility = "hidden";
+        else deck.style.visibility = "";
 		return card;
 	} else cardGenerator();
 };
 
 // Función para mostrar barajas y carta boca arriba
-let visibleCard = ([a, b]) => {
-	while (cardContent.firstChild)
-		cardContent.removeChild(cardContent.lastChild);
+function visibleCard([a, b]) {
+    while (cardContent.firstChild)
+    cardContent.removeChild(cardContent.lastChild);
 	cardHeader.textContent = ranks[a];
 	cardFooter.textContent = ranks[a];
 	cardContent.append(cardHeader, suits[b], cardFooter);
 };
 
-window.onload = visibleCard(cardGenerator());
-
-document.getElementById("newCard").addEventListener("click", newCard => {
+function newCard() {
 	if (downCard.length > 51)
 		alert("No quedan cartas en la baraja, favor revuelve los naipes");
 	else visibleCard(cardGenerator());
-});
+};
 
-document.getElementById("newDeck").addEventListener("click", shuffle => {
+function shuffle() {
 	downCard = [];
 	visibleCard(cardGenerator());
-});
+};
+
+window.onload = newCard;
+
+document.getElementById("newCard").addEventListener("click", newCard);
+
+
+document.getElementById("newDeck").addEventListener("click", shuffle); 
